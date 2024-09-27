@@ -1,0 +1,37 @@
+@layer typography, layout, flow;
+
+@layer typography {
+  :where(h1, h2, h3, h4, h5, h6) {
+    text-wrap: balance;
+  }
+}
+
+@layer layout {
+  main {
+    margin: 0 auto;
+    max-width: 1200px;
+    container: container / inline-size;
+  }
+}
+
+@layer flow {
+  :where(p, ul, ol, dl) {
+    margin-block: var(--rh-space-lg) var(--rh-space-2xl);
+  }
+
+  :where(li) {
+    margin-block: var(--rh-space-md);
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    margin-block-end: var(--rh-space-lg);
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) + :where(h2, h3, h4, h5, h6) {
+    margin-block-start: var(--rh-space-2xl);
+  }
+
+  .grid {
+    margin-block-end: var(--rh-space-4xl);
+  }
+}

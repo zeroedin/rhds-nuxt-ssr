@@ -1,0 +1,36 @@
+diff --git a/node_modules/nuxt-ssr-lit/dist/module.mjs b/node_modules/nuxt-ssr-lit/dist/module.mjs
+index afe1848..2f54066 100644
+--- a/node_modules/nuxt-ssr-lit/dist/module.mjs
++++ b/node_modules/nuxt-ssr-lit/dist/module.mjs
+@@ -37,6 +37,7 @@ const module = defineNuxtModule({
+     addVitePlugin(
+       autoLitWrapper({
+         litElementPrefix: options.litElementPrefix,
++        litElementExclude: options.litElementExclude,
+         sourcemap: !!nuxt.options.sourcemap.server || !!nuxt.options.sourcemap.client
+       })
+     );
+diff --git a/node_modules/nuxt-ssr-lit/dist/runtime/plugins/autoLitWrapper.js b/node_modules/nuxt-ssr-lit/dist/runtime/plugins/autoLitWrapper.js
+index 3bb210b..b5c6cb2 100644
+--- a/node_modules/nuxt-ssr-lit/dist/runtime/plugins/autoLitWrapper.js
++++ b/node_modules/nuxt-ssr-lit/dist/runtime/plugins/autoLitWrapper.js
+@@ -28,6 +28,7 @@ function isVue(id, opts = {}) {
+ }
+ export default function autoLitWrapper({
+   litElementPrefix = [],
++  litElementExclude = [],
+   sourcemap = false
+ }) {
+   const litElementPrefixes = Array.isArray(litElementPrefix) ? litElementPrefix : [litElementPrefix];
+@@ -57,6 +58,11 @@ export default function autoLitWrapper({
+             if (node.type !== NodeTypes.ELEMENT || !prefixRegex.test(node.tag)) {
+               return;
+             }
++
++            if (litElementExclude.includes(node.tag)) {
++              return;
++            }
++
+             const foundDirectivesToMove = node.props.filter((prop) => allDirectivesToMove.includes(prop.rawName));
+             const directivesToAdd = foundDirectivesToMove.length ? ` ${foundDirectivesToMove.map((attr) => attr.loc.source).join(" ")}` : "";
+             const wrapperStartTag = `<LitWrapper${directivesToAdd}>`;
