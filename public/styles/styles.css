@@ -1,4 +1,10 @@
-@layer typography, layout, flow;
+@layer reset, tokens, fonts, typography, layout, grid, flow;
+
+@import url("https://ux.redhat.com/assets/packages/@rhds/tokens/css/global.css") layer(tokens);
+@import url("https://ux.redhat.com/styles/reset.css") layer(reset);
+@import url("https://ux.redhat.com/styles/fonts.css") layer(fonts);
+@import url("https://ux.redhat.com/styles/typography.css") layer(typography);
+@import url("https://ux.redhat.com/styles/grid.css") layer(grid);
 
 @layer typography {
   :where(h1, h2, h3, h4, h5, h6) {
@@ -7,6 +13,10 @@
 }
 
 @layer layout {
+  body {
+    margin-inline: var(--rh-space-lg);
+  }
+
   main {
     margin: 0 auto;
     max-width: 1200px;
@@ -24,7 +34,7 @@
   }
 
   :where(h1, h2, h3, h4, h5, h6) {
-    margin-block-end: var(--rh-space-lg);
+    margin-block-end: var(--rh-space-2xl);
   }
 
   :where(h1, h2, h3, h4, h5, h6) + :where(h2, h3, h4, h5, h6) {
@@ -32,6 +42,10 @@
   }
 
   .grid {
+    margin-block-end: var(--rh-space-4xl);
+  }
+
+  hr {
     margin-block-end: var(--rh-space-4xl);
   }
 }
