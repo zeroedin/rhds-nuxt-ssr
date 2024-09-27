@@ -16,5 +16,8 @@
     "nuxt-ssr-lit": "^1.6.26",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.0"
   }
 }
